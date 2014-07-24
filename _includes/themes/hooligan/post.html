@@ -1,0 +1,64 @@
+<div class="page-header">
+  <h1 id="mainTitle">
+    {{ page.title }} 
+    {% if page.tagline %}
+      <small>{{ page.tagline }}</small>
+    {% endif %}
+  </h1>
+</div>
+
+<div class="row">
+  
+  <div class="span4">
+    <section>
+    <h3><i class="icon-calendar"></i>Published</h3>
+      <div class="date"><span style="margin-left: 20px">{{ page.date | date_to_long_string }}</span></div>
+    </section>
+    {% if page.category %}
+      <section>
+        <h3>Category</h3>
+        <span class="category" style="margin-left: 20px">
+          {{ page.category }}
+        </span>
+      </section>
+    {% endif %}     
+    {% unless page.tags == empty %}
+      <section id="tags_box">
+        <h3><i class="icon-tags"></i>Tags</h3>
+        <ul class="tag_box" style="margin-left: 20px">
+          {% assign tags_list = page.tags %}
+          {% include JB/tags_list %}
+        </ul>
+      </section>
+    {% endunless %}   
+      <section id="contents">
+        <h3><i class="icon-th-list"></i>Contents</h3>
+        <div id="content_box">
+        </div>
+      </section>
+  </div>
+
+
+  <div class="span8">
+    <div id="content">
+      {{ content }}
+    </div>
+    <hr>
+    <div class="pagination btn-group">
+      {% if page.previous %}
+        <a class="btn prev" href="{{ BASE_PATH }}{{ page.previous.url }}" title="{{ page.previous.title }}">&larr; Previous</a>
+      {% else %}
+        <a class="btn disabled prev">&larr; Previous</a>
+      {% endif %}
+        <a class="btn" href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Archive</a>
+      {% if page.next %}
+        <a class="btn next" href="{{ BASE_PATH }}{{ page.next.url }}" title="{{ page.next.title }}">Next &rarr;</a>
+      {% else %}
+        <a class="btn next disabled">Next &rarr;</a>
+      {% endif %}
+    </div>
+    <hr>
+    {% include JB/comments %}
+  </div>
+  
+</div>
